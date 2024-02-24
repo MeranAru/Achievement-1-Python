@@ -20,7 +20,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS Recipes(
     difficulty VARCHAR(20))
     ''')
 
-
+# create main menu function
 def main_menu(conn, cursor):
     choice = ""
     while (choice != "quit"):
@@ -48,7 +48,7 @@ def main_menu(conn, cursor):
         elif choice == "5":
             view_all_recipes(conn, cursor)
 
-
+# create recipe function
 def create_recipe(conn, cursor):
     recipe_ingredients = []
     name = input("\nEnter the name of the recipe: ")
@@ -64,7 +64,7 @@ def create_recipe(conn, cursor):
     conn.commit()
     print("Recipe saved into the database.")
 
-
+# calc_difficulty function
 def calc_difficulty(cooking_time, recipe_ingredients):
     print("Run the calc_difficulty with: ", cooking_time, recipe_ingredients)
 
@@ -82,7 +82,7 @@ def calc_difficulty(cooking_time, recipe_ingredients):
     print("Difficulty level: ", difficulty_level)
     return difficulty_level
 
-
+# search recipe function
 def search_recipe(conn, cursor):
     all_ingredients = []
     cursor.execute("SELECT ingredients FROM Recipes")
@@ -130,7 +130,7 @@ def search_recipe(conn, cursor):
             print("Cooking Time: ", row[3])
             print("Difficulty: ", row[4])
 
-
+# update recipe function
 def update_recipe(conn, cursor):
     view_all_recipes(conn, cursor)
     recipe_id_for_update = int(
@@ -184,7 +184,7 @@ def update_recipe(conn, cursor):
 
     conn.commit()
 
-
+# delete recipe function
 def delete_recipe(conn, cursor):
     view_all_recipes(conn, cursor)
     recipe_id_for_deletion = (
@@ -195,7 +195,7 @@ def delete_recipe(conn, cursor):
     conn.commit()
     print("\nRecipe successfully deleted from the database.")
 
-
+# view recipe function
 def view_all_recipes(conn, cursor):
     print("\nAll recipes can be found below: ")
     print("-------------------------------------------")
